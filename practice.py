@@ -20,3 +20,12 @@ for i, part in enumerate(split_parts):
         split_parts[i] = matches[index]
 
 print(split_parts)
+
+
+class New:
+    pass
+
+
+new = New()
+
+print(New.__name__)
