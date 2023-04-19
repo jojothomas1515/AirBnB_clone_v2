@@ -152,7 +152,7 @@ class HBNBCommand(cmd.Cmd):
         # extract the class name
         class_name = tokens[0]
         # extract all params
-        params = tokens[1:]
+        params = tokens[1]
 
         # if class not in class
         if class_name not in HBNBCommand.classes:
