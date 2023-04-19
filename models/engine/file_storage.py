@@ -73,3 +73,12 @@ class FileStorage:
             # get key
             key = f"{type(obj).__name__}.{obj.id}"
             del self.__objects[key]
+    @classmethod
+    def set_path(cls, file_path: str):
+        """To change the save file path."""
+        cls.__file_path = file_path
+
+    @classmethod
+    def new_object(cls):
+        """Object storage."""
+        cls.__objects = {}
