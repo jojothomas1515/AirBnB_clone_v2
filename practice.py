@@ -37,3 +37,13 @@ print( pp.findall(s))
 
 
 
+print(split_parts)
+
+
+class New:
+    pass
+
+
+new = New()
+
+print(New.__name__)
