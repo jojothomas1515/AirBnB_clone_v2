@@ -41,14 +41,14 @@ print(pp.findall(s))
 class New:
     # user = "Ayo"
 
-    def __init__(self, name):
-        self.name = name
+    def __init__(self):
+        self.name = "something"
         self.email = "toronto dsdks"
         self.number = "0812237823"
         user = "Ayo"
         self.user = user
 
 
-new = New(Ayo)
+new = New()
 
-print(new.user)
+print(New.__name__)
