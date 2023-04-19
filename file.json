@@ -13,5 +13,12 @@
 		"updated_at": "2023-04-19T14:21:01.861634",
 		"name": "jojo thomas",
 		"__class__": "User"
+	},
+	"State.ecccd875-0dc3-4129-a6d1-9433f7604ce0": {
+		"id": "ecccd875-0dc3-4129-a6d1-9433f7604ce0",
+		"created_at": "2023-04-19T17:20:32.924243",
+		"updated_at": "2023-04-19T17:20:32.924327",
+		"name": "Edo",
+		"__class__": "State"
 	}
 }
