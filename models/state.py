@@ -16,4 +16,6 @@ class State(BaseModel, Base):
     @property
     def cities(self):
         """All cities associated with city id."""
-        pass
+        cities_list = []
+        from models import storage
+        all_object = storage.all()

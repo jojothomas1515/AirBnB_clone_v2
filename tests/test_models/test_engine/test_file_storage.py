@@ -124,7 +124,7 @@ class test_fileStorage(unittest.TestCase):
 
     # @patch('models.engine.file_storage.FileStorage._FileStorage__objects',
     #        {'ClassName.id1': 'object1', 'ClassName.id2': 'object2',
-    #         'OtherClassName.id1': 'object3', 'OtherClassName.id2': 'object4'})
+    #        'OtherClassName.id1': 'object3', 'OtherClassName.id2': 'object4'})
     def test_all_with_cls(self):
         file_storage = FileStorage()
         ClassName = 'ClassName.id1'.split('.')[0]
@@ -138,8 +138,10 @@ class test_fileStorage(unittest.TestCase):
     def test_all_without_cls(self):
         file_storage = FileStorage()
         result = file_storage.all()
-        self.assertEqual(result, {'ClassName.id1': 'object1', 'ClassName.id2': 'object2',
-                         'OtherClassName.id1': 'object3', 'OtherClassName.id2': 'object4'})
+        self.assertEqual(result, {'ClassName.id1': 'object1',
+                                  'ClassName.id2': 'object2',
+                                  'OtherClassName.id1': 'object3',
+                                  'OtherClassName.id2': 'object4'})
 
 
 class TestConsole(TestCase):
@@ -255,4 +257,3 @@ class TestConsoleWithFileStorage(TestCase):
         all_objects = storage.all()
 
         self.assertEqual(len(all_objects), 4)
-
