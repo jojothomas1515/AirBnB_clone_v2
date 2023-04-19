@@ -31,19 +31,24 @@ jj = re.compile(pattern)
 pp = re.compile(param_pattern)
 
 print(jj.findall(s))
-print( pp.findall(s))
+print(pp.findall(s))
 #    print(data[0].split("="))
 
 
-
-
-print(split_parts)
+# print(split_parts)
 
 
 class New:
-    pass
+    # user = "Ayo"
+
+    def __init__(self, name):
+        self.name = name
+        self.email = "toronto dsdks"
+        self.number = "0812237823"
+        user = "Ayo"
+        self.user = user
 
 
-new = New()
+new = New(Ayo)
 
-print(New.__name__)
+print(new.user)
