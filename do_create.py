@@ -39,3 +39,25 @@ def do_create(self, args):
     storage.save()
     print(new_instance.id)
     storage.save()
+
+
+def delete(self, obj=None):
+    if obj:
+        # get key
+        key = f"{type(obj).__name__}.{obj.id}"
+        del self.__objects[key]
+
+
+def all(self, cls=None):
+
+    new_dict = {}
+    data_dict = self.__objects
+    if cls:
+        for key in data_dict.keys():
+            key_dot_stripped = key.replace('.', ' ')
+            key_split = key_dot_stripped.split()
+
+            if (cls.___name__ == key_split[0])
+
+        """Returns a dictionary of models currently in storage"""
+    return FileStorage.__objects
