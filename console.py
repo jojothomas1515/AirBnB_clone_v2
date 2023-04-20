@@ -133,7 +133,7 @@ class HBNBCommand(cmd.Cmd):
         # Tokenize the args from the console
         tokens = tokenize(args)
         # check if args passed
-        if args == "" or len(tokens) < 2:
+        if args == "":
             print("** class name missing **")
             return
         # extract the class name
