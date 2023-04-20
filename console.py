@@ -24,7 +24,7 @@ def tokenize(args: str) -> list:
         list: Description
     """
     pattern = r"^(?P<name>[A-Za-z0-9]+)"
-    param_pattern = r"(?P<params>\w+=(\"[^\"]+\"|\d+))"
+    param_pattern = r"(?P<params>\w+=(\"[^\"]+\"|[\d\.-]+))"
 
     class_validator = re.compile(pattern)
     params_validator = re.compile(param_pattern)
