@@ -4,7 +4,7 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
-
+import models
 
 class State(BaseModel, Base):
     """State class."""
@@ -20,7 +20,8 @@ class State(BaseModel, Base):
         # from models import storage
         # all_object = storage.all()
         # review_list = []
+        from models.city import City
         for city in models.storage.all(City).values():
             if city.state_id == self.id:
-                review_list.append(city)
-        return review_list
+                cities_list.append(city)
+        return cities_list
