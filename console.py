@@ -18,26 +18,13 @@ def tokenize(args: str) -> list:
     """Tokenizer.
 
     Args:
-        args (str): Description
+        args (str): console input
 
     Returns:
-        list: Description
+        list: list of tokens
     """
-    pattern = r"^(?P<name>[A-Za-z0-9]+)"
-    param_pattern = r"(?P<params>\w+=(\"[^\"]+\"|\d+))"
-
-    class_validator = re.compile(pattern)
-    params_validator = re.compile(param_pattern)
-
-    token: list = list()
-
-    obj_class = class_validator.findall(args)
-    obj_param = params_validator.findall(args)
-
-    if len(obj_class) != 0:
-        token.append(obj_class[0])
-    token.append([data[0] for data in obj_param])
-    return token
+    tokens = args.split()
+    return tokens
 
 
 class HBNBCommand(cmd.Cmd):
@@ -152,7 +139,7 @@ class HBNBCommand(cmd.Cmd):
         # extract the class name
         class_name = tokens[0]
         # extract all params
-        params = tokens[1]
+        params = tokens[1:]
 
         # if class not in class
         if class_name not in HBNBCommand.classes:
