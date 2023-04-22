@@ -2,6 +2,7 @@
 """ """
 import unittest
 from models.state import State
+from models import storage
 
 
 class test_state(unittest.TestCase):
@@ -9,6 +10,7 @@ class test_state(unittest.TestCase):
 
     def setUp(self):
         """."""
+        storage.reload()
         self.value = State(name="Lagos")
 
     def test_name3(self):
