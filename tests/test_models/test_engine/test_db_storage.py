@@ -5,17 +5,18 @@ from os import environ
 from unittest.mock import patch
 from io import StringIO
 import MySQLdb
+from sqlalchemy.orm.exc import UnmappedInstanceError
 
 from models.state import State
 from models.city import City
 from models import storage
-from models.base_model import Base
+from models.base_model import Base, BaseModel
 from console import HBNBCommand
 
 
 @unittest.skipUnless(environ.get("HBNB_TYPE_STORAGE") == "db",
                      "skip when using filestorage")
-class TestDatabase(unittest.TestCase):
+class TestConsoleDatabase(unittest.TestCase):
     """Tests when storage type db."""
 
     @classmethod
@@ -84,3 +85,39 @@ class TestDatabase(unittest.TestCase):
 
         self.assertEqual("Delta State", data[0][0])
         self.assertEqual(state_id, data[0][1])
+
+
+@unittest.skipUnless(environ.get("HBNB_TYPE_STORAGE") == "db",
+                     "skip when using filestorage")
+class TestDBStorage(unittest.TestCase):
+    """."""
+
+    @classmethod
+    def setUpClass(cls):
+        """Sets up class before running any tests."""
+        HOST = environ.get("HBNB_MYSQL_HOST")
+        USER = environ.get("HBNB_MYSQL_USER")
+        PWD = environ.get("HBNB_MYSQL_PWD")
+        DB = environ.get("HBNB_MYSQL_DB")
+        cls.db_con = MySQLdb.connect(user=USER, password=PWD, host=HOST,
+                                     database=DB)
+
+    def setUp(self):
+        """To set the needed things for every test."""
+        storage.reload()
+
+    def tearDown(self):
+        """Run for cleanup on eery test."""
+        cursor = self .db_con.cursor()
+
+        cursor.execute("SET FOREIGN_KEY_CHECKS=0")
+        cursor.execute("DROP TABLE cities;DROP TABLE states")
+        cursor.execute("SET FOREIGN_KEY_CHECKS=1")
+        cursor.close()
+
+    def test_basemodel(self):
+        """."""
+        with self.assertRaises(AttributeError and UnmappedInstanceError):
+            new = BaseModel()
+            new.save()
+
