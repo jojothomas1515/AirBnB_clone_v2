@@ -32,4 +32,9 @@ sed -i "/server_name _;/a\ \tlocation /hbnb_static {\n\t\talias /data/web_static
 
 sed -i "/server_name _;/a\ \tadd_header X-Served-By \$HOSTNAME always;" /etc/nginx/sites-available/default
 
-service nginx restart
+if (( "$(pgrep -c nginx)" <= "0"))
+then
+    service nginx restart
+else
+    service nginx start
+fi
