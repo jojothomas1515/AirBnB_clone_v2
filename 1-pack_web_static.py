@@ -8,6 +8,7 @@ import os
 
 
 def do_pack():
+    """Compresses web static and add it to versions."""
     if not pl.Path("versions").is_dir():
         os.makedirs("versions")
     mypath = "versions/web_static_{}.tgz".format(
