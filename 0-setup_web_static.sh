@@ -38,7 +38,7 @@ sed -i "/server_name _;/a\ \tlocation /hbnb_static {\n\t\talias /data/web_static
 
 if (( "$(pgrep -c nginx)" <= "0"))
 then
-    service nginx restart
-else
     service nginx start
+else
+    service nginx restart
 fi
