@@ -6,24 +6,6 @@ import time
 import pathlib as pl
 import os
 
-env.hosts = ['34.205.65.154', '34.239.107.150']
-env.user = 'ubuntu'
-
-
-def do_pack():
-    """Compresses web static and add it to versions."""
-    if not pl.Path("versions").is_dir():
-        os.makedirs("versions")
-    mypath = "versions/web_static_{}.tgz".format(
-        time.strftime("%Y%m%d%H%M%S"))
-    res = local("tar caf {paths} web_static/"
-                .format(paths=mypath), )
-
-    if not pl.Path(mypath).is_file():
-        return None
-    return pl.Path(mypath).absolute()
-
-
 def do_deploy(archive_path: str) -> str or None:
     """Push a specified archive in my server.
 
