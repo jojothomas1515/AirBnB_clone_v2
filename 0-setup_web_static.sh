@@ -2,7 +2,7 @@
 # Write a Bash script that sets up your web servers for the deployment of web_static
 
 # install nginx only if it is not installed in it
-if ! command -V nginx > /dev/null
+if ! command -V nginx &> /dev/null
 then
     apt-get update -y
     apt-get install nginx -y
@@ -20,6 +20,7 @@ echo "Hello Holberton" > /data/web_static/releases/test/index.html
 
 # symbolic link to the test directory
 ln -sf /data/web_static/releases/test/ /data/web_static/current
+
 chown -R ubuntu:ubuntu /data/
 
 nginx_conf="
