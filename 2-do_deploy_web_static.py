@@ -27,18 +27,17 @@ def do_deploy(archive_path: str) -> str or None:
             return None
 
         put(a_path, '/tmp/', use_sudo=True)
-
         run("mkdir -p {path}".format(path=dest))
         run("tar -xzf /tmp/{name} -C {dest}"
             .format(name=name, dest=dest))
         run("rm /tmp/{name}".format(name=name))
-        run("rm -rf /data/web_static/current")
-        run("ln -sf {dest} {link}"
-            .format(dest=dest, link=link))
         run("mv {dest}web_static/* {dest}"
             .format(dest=dest))
+        run("rm -rf /data/web_static/current")
         run("rm -rf {dest}web_static"
             .format(dest=dest))
+        run("ln -sf {dest} {link}"
+            .format(dest=dest, link=link))
         return True
     except Exception:
         return False
