@@ -45,9 +45,13 @@ server {
 	}
 
 	location /hbnb_static {
-		 alias /data/web_static/current/;
-		 try_files \$uri \$uri/ =404;
+		 alias /data/web_static/current;
 	}
+
+	location = /not_found.html {
+	    internal;
+	}
+
 }
 "
 
