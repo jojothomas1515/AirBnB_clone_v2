@@ -21,7 +21,8 @@ echo "Hello Holberton" > /data/web_static/releases/test/index.html
 # symbolic link to the test directory
 ln -sf /data/web_static/releases/test/ /data/web_static/current
 
-chown -R ubuntu:ubuntu /data/
+chown -R ubuntu /data/
+chgrp -R ubuntu /data/
 
 nginx_conf="
 server {
@@ -46,6 +47,7 @@ server {
 
 	location /hbnb_static {
 		 alias /data/web_static/current;
+		 index 
 	}
 
 	location = /not_found.html {
@@ -55,8 +57,6 @@ server {
 }
 "
 
-echo -e "$nginx_conf" > /etc/nginx/sites-available/web_static
-ln -sf /etc/nginx/sites-available/web_static /etc/nginx/sites-enabled/web_static
-rm -f /etc/nginx/sites-enabled/default
+echo -e "$nginx_conf" > /etc/nginx/sites-enabled/default
 
 service nginx restart
