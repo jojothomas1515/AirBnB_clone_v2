@@ -6,6 +6,9 @@ import time
 import pathlib as pl
 import os
 
+env.hosts = ['34.205.65.154', '34.239.107.150']
+env.user = 'ubuntu'
+
 def do_deploy(archive_path: str) -> str or None:
     """Push a specified archive in my server.
 
@@ -25,7 +28,7 @@ def do_deploy(archive_path: str) -> str or None:
         put(a_path, '/tmp/', use_sudo=True)
 
         sudo("mkdir -p {path}".format(path=dest))
-        sudo("tar xf /tmp/{name} -C {dest}"
+        sudo("tar -xzf /tmp/{name} -C {dest}"
              .format(name=name, dest=dest))
         sudo("rm -r /tmp/{name}".format(name=name))
         sudo("rm -rf /data/web_static/current")
