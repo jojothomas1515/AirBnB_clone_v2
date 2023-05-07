@@ -9,6 +9,7 @@ import os
 env.hosts = ['34.205.65.154', '34.239.107.150']
 env.user = 'ubuntu'
 
+
 def do_deploy(archive_path: str) -> str or None:
     """Push a specified archive in my server.
 
