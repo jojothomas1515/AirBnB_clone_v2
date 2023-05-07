@@ -14,7 +14,7 @@ echo "Ceci n'est pas une page" > /var/www/html/not_found.html
 
 # creates data directory and all of it sub directories
 mkdir -p /data/web_static/releases/test/
-mkdir -p /data/web_static/shared
+mkdir -p /data/web_static/shared/
 
 echo "Hello Holberton" > /data/web_static/releases/test/index.html
 
