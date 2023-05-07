@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Distribute the compressed version of  web_static\
 folder of your AirBnB Clone repo."""
-from fabric.api import local, env, sudo, put
+from fabric.api import env, run, put
 import time
 import pathlib as pl
 import os
@@ -28,16 +28,16 @@ def do_deploy(archive_path: str) -> str or None:
 
         put(a_path, '/tmp/', use_sudo=True)
 
-        sudo("mkdir -p {path}".format(path=dest))
-        sudo("tar -xzf /tmp/{name} -C {dest}"
+        run("mkdir -p {path}".format(path=dest))
+        run("tar -xzf /tmp/{name} -C {dest}"
              .format(name=name, dest=dest))
-        sudo("rm -r /tmp/{name}".format(name=name))
-        sudo("rm -rf /data/web_static/current")
-        sudo("ln -s {dest} {link} -f"
+        run("rm -r /tmp/{name}".format(name=name))
+        run("rm -rf /data/web_static/current")
+        run("ln -s {dest} {link} -f"
              .format(dest=dest, link=link))
-        sudo("mv -u {dest}web_static/* {dest}"
+        run("mv -u {dest}web_static/* {dest}"
              .format(dest=dest))
-        sudo("rm -r {dest}web_static/"
+        run("rm -r {dest}web_static/"
              .format(dest=dest))
         return True
     except Exception:
