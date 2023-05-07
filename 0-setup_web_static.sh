@@ -47,7 +47,7 @@ server {
 
 	location /hbnb_static {
 		 alias /data/web_static/current;
-		 index 
+		 index index.html 0-index.html;
 	}
 
 	location = /not_found.html {
