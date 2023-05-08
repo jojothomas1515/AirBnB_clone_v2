@@ -2,7 +2,7 @@
 # Write a Bash script that sets up your web servers for the deployment of web_static
 
 # install nginx only if it is not installed in it
-if ! command -V nginx &> /dev/null
+if ! command -v nginx &> /dev/null
 then
     apt-get update -y
     apt-get install nginx -y
@@ -16,7 +16,18 @@ echo "Ceci n'est pas une page" > /var/www/html/not_found.html
 mkdir -p /data/web_static/releases/test/
 mkdir -p /data/web_static/shared/
 
-echo "Hello Holberton" > /data/web_static/releases/test/index.html
+fakeData="
+<html>
+  <head>
+  </head>
+  <body>
+    Holberton School
+  </body>
+</html>
+"
+
+
+echo -e "$fakeData" > /data/web_static/releases/test/index.html
 
 # symbolic link to the test directory
 ln -sf /data/web_static/releases/test/ /data/web_static/current
@@ -60,4 +71,5 @@ server {
 
 echo -e "$nginx_conf" > /etc/nginx/sites-enabled/default
 
+service nginx start
 service nginx restart
