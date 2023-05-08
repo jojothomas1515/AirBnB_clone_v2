@@ -69,7 +69,7 @@ server {
 }
 "
 
-echo -e "$nginx_conf" > /etc/nginx/sites-enabled/default
+echo -e "$nginx_conf" > /etc/nginx/sites-available/default
 
 service nginx start
 service nginx restart
