@@ -19,18 +19,19 @@ mkdir -p /data/web_static/shared/
 echo "Hello Holberton" > /data/web_static/releases/test/index.html
 
 # symbolic link to the test directory
-ln -s /data/web_static/releases/test/ /data/web_static/current
+ln -sf /data/web_static/releases/test/ /data/web_static/current
 
 chown -R ubuntu /data/
 chgrp -R ubuntu /data/
 
 nginx_conf="
 server {
-       listen 80 default_server;
+       listen 80 default_server;	
        listen [::]:80 default_server;
 
        root /var/www/html;
 
+       index index.html index.htm;
        server_name _;
 
        add_header X-Served-By \$HOSTNAME always;
@@ -46,8 +47,8 @@ server {
 	}
 
 	location /hbnb_static {
-		 alias /data/web_static/current/;
-		 index index.html 0-index.html;
+		 alias /data/web_static/current;
+		 index index.html index.htm;
 	}
 
 	location = /not_found.html {
