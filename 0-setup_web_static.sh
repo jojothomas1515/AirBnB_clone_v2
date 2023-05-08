@@ -19,7 +19,7 @@ mkdir -p /data/web_static/shared/
 echo "Hello Holberton" > /data/web_static/releases/test/index.html
 
 # symbolic link to the test directory
-ln -sf /data/web_static/releases/test/ /data/web_static/current
+ln -s /data/web_static/releases/test/ /data/web_static/current
 
 chown -R ubuntu /data/
 chgrp -R ubuntu /data/
