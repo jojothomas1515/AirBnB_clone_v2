@@ -16,15 +16,13 @@ echo "Ceci n'est pas une page" > /var/www/html/not_found.html
 mkdir -p /data/web_static/releases/test/
 mkdir -p /data/web_static/shared/
 
-fakeData="
-<html>
+fakeData="<html>
   <head>
   </head>
   <body>
     Holberton School
   </body>
-</html>
-"
+</html>"
 
 
 echo -e "$fakeData" > /data/web_static/releases/test/index.html
@@ -35,9 +33,8 @@ ln -sf /data/web_static/releases/test/ /data/web_static/current
 chown -R ubuntu /data/
 chgrp -R ubuntu /data/
 
-nginx_conf="
-server {
-       listen 80 default_server;	
+nginx_conf="server {
+       listen 80 default_server;
        listen [::]:80 default_server;
 
        root /var/www/html;
@@ -57,7 +54,7 @@ server {
 		 return 301 https://jojoport.netlify.com;
 	}
 
-	location /hbnb_static {
+	location /hbnb_stat {
 		 alias /data/web_static/current;
 		 index index.html index.htm;
 	}
@@ -66,8 +63,7 @@ server {
 	    internal;
 	}
 
-}
-"
+}"
 
 echo -e "$nginx_conf" > /etc/nginx/sites-available/default
 
