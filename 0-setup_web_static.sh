@@ -49,6 +49,6 @@ nginx_conf="server {
 	}
 }"
 
-sh -c "echo '$nginx_conf' > /etc/nginx/sites-available/default"
+echo -e "$nginx_conf" > /etc/nginx/sites-available/default
 
 service nginx restart
