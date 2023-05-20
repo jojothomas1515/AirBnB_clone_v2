@@ -43,8 +43,8 @@ nginx_conf="server {
 		alias /data/web_static/current;
 		index index.html index.htm;
 	}
-	error_page 404 /404.html;
-	location = /404.html{
+	error_page 404 /not_found.html;
+	location = /not_found.html{
 		internal;
 	}
 }"
