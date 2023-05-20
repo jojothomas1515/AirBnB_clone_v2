@@ -4,7 +4,7 @@
 # install nginx only if it is not installed in it
 if ! command -v nginx &> /dev/null
 then
-    apt-get update -y
+    apt-get update
     apt-get install nginx -y
 fi
 
@@ -14,9 +14,6 @@ echo "Ceci n'est pas une page" > /var/www/html/not_found.html
 
 # creates data directory and all of it sub directories
 mkdir -p /data/web_static/releases/test/ 
-mkdir -p /data/web_static/shared/
-
-mkdir -p /data/web_static/releases/test/
 mkdir -p /data/web_static/shared/
 
 echo -e "Hello Holberton" > /data/web_static/releases/test/index.html
@@ -56,7 +53,7 @@ nginx_conf="server {
 	}
 
 }"
-echo -e "$nginx_conf" > /etc/nginx/sites-available/default
+echo "$nginx_conf" > /etc/nginx/sites-available/default
 
 service nginx start
 service nginx restart
