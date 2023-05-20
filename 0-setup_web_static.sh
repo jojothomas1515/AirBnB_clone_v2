@@ -16,7 +16,7 @@ echo "Ceci n'est pas une page" > /var/www/html/not_found.html
 mkdir -p /data/web_static/releases/test/ 
 mkdir -p /data/web_static/shared/
 
-echo -e "Hello Holberton" > /data/web_static/releases/test/index.html
+echo "Hello Holberton" > /data/web_static/releases/test/index.html
 
 # symbolic link to the test directory
 ln -sf /data/web_static/releases/test/ /data/web_static/current
@@ -24,36 +24,31 @@ ln -sf /data/web_static/releases/test/ /data/web_static/current
 chown -h -R ubuntu:ubuntu /data/
 
 nginx_conf="server {
-       listen 80 default_server;
-       listen [::]:80 default_server;
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	root /var/www/html;
+	# Add index.php to the list if you are using PHP
+	index index.html index.htm index.nginx-debian.html;
 
-       root /var/www/html;
+	server_name _;
+	add_header X-Served-By $HOSTNAME;
 
-       index index.html index.htm;
-       server_name _;
-
-       add_header X-Served-By \$HOSTNAME always;
-
-       error_page 404 /not_found.html;
-
-       location /hbnb_static {
-		 alias /data/web_static/current/;
+	location / {
+		try_files \$uri \$uri/ =404;
 	}
-
-       location / {
-       		try_files \$uri \$uri/ =404;
+	if (\$request_filename ~ redirect_me){
+			rewrite ^ https://jojoport.netlify.app permanent;
 	}
-
-	location /redirect_me {
-		 return 301 https://jojoport.netlify.com;
+	location /hbnb_static {
+		alias /data/web_static/current;
+		index index.html index.htm;
 	}
-
-	location = /not_found.html {
-	    internal;
+	error_page 404 /404.html;
+	location = /404.html{
+		internal;
 	}
-
 }"
+
 sh -c "echo '$nginx_conf' > /etc/nginx/sites-available/default"
 
-service nginx start
 service nginx restart
