@@ -3,20 +3,20 @@
 
 if ! command -v nginx &> /dev/null
 then
-    sudo apt-get update
-    sudo apt-get -y install nginx
+    apt-get update
+    apt-get -y install nginx
 fi
 
 mkdir -p /data/web_static/releases/test/
 mkdir -p /data/web_static/shared/
 
-sudo sh -c "echo 'Hello World!' > /data/web_static/releases/test/index.html"
+sh -c "echo 'Hello World!' > /data/web_static/releases/test/index.html"
 ln -sf /data/web_static/releases/test/ /data/web_static/current
 chown -R ubuntu /data/
 chgrp -R ubuntu /data/
 
-sudo touch /var/www/html/404.html
-sudo sh -c "echo \"Ceci n'est pas une page\" > /var/www/html/404.html"
+touch /var/www/html/404.html
+sh -c "echo \"Ceci n'est pas une page\" > /var/www/html/404.html"
 SERVER_CONFIG="server {
 	listen 80 default_server;
 	listen [::]:80 default_server;
@@ -42,5 +42,5 @@ SERVER_CONFIG="server {
 		internal;
 	}
 }"
-sudo sh -c "echo '$SERVER_CONFIG' > /etc/nginx/sites-enabled/default"
-sudo service nginx restart
+sh -c "echo '$SERVER_CONFIG' > /etc/nginx/sites-enabled/default"
+service nginx restart
