@@ -42,5 +42,5 @@ SERVER_CONFIG="server {
 		internal;
 	}
 }"
-echo -e '$SERVER_CONFIG' > /etc/nginx/sites-enabled/default"
+echo -e $SERVER_CONFIG > /etc/nginx/sites-enabled/default"
 sudo service nginx restart
