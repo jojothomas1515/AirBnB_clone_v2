@@ -28,7 +28,7 @@ def do_deploy(archive_path: str) -> str or None:
 
         put(a_path, '/tmp/', use_sudo=True)
         run("mkdir -p {path}".format(path=dest))
-        run("tar -xzf /tmp/{name} -C {dest}"
+        run("tar -xvf /tmp/{name} -C {dest}"
             .format(name=name, dest=dest))
         run("rm /tmp/{name}".format(name=name))
         run("mv {dest}web_static/* {dest}"
