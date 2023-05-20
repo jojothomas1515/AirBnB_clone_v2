@@ -56,7 +56,8 @@ nginx_conf="server {
 	}
 
 }"
-echo -e "$nginx_conf" > /etc/nginx/sites-available/default
+# echo -e "$nginx_conf" > /etc/nginx/sites-available/default
+sudo sh -c "echo '$SERVER_CONFIG' > /etc/nginx/sites-available/default"
 
 service nginx start
 service nginx restart
