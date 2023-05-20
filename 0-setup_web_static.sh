@@ -1,63 +1,46 @@
 #!/usr/bin/env bash
-# Write a Bash script that sets up your web servers for the deployment of web_static
+# configure web server for web_static
 
-# install nginx only if it is not installed in it
 if ! command -v nginx &> /dev/null
 then
-    apt-get update -y
-    apt-get install nginx -y
+    sudo apt-get update
+    sudo apt-get -y install nginx
 fi
-
-# creates the index page and error page
-echo "Hello World!" > /var/www/html/index.html
-echo "Ceci n'est pas une page" > /var/www/html/not_found.html
-
-# creates data directory and all of it sub directories
-mkdir -p /data/web_static/releases/test/ 
-mkdir -p /data/web_static/shared/
 
 mkdir -p /data/web_static/releases/test/
 mkdir -p /data/web_static/shared/
 
-echo -e "Hello Holberton" > /data/web_static/releases/test/index.html
-
-# symbolic link to the test directory
+sudo sh -c "echo 'Hello World!' > /data/web_static/releases/test/index.html"
 ln -sf /data/web_static/releases/test/ /data/web_static/current
+chown -R ubuntu /data/
+chgrp -R ubuntu /data/
 
-chown -h -R ubuntu:ubuntu /data/
+sudo touch /var/www/html/404.html
+sudo sh -c "echo \"Ceci n'est pas une page\" > /var/www/html/404.html"
+SERVER_CONFIG="server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	root /var/www/html;
+	# Add index.php to the list if you are using PHP
+	index index.html index.htm index.nginx-debian.html;
 
-nginx_conf="server {
-       listen 80 default_server;
-       listen [::]:80 default_server;
+	server_name _;
+	add_header X-Served-By $HOSTNAME;
 
-       root /var/www/html;
-
-       index index.html index.htm;
-       server_name _;
-
-       add_header X-Served-By \$HOSTNAME always;
-
-       error_page 404 /not_found.html;
-
-       location /hbnb_static {
-		 alias /data/web_static/current/;
+	location / {
+		try_files \$uri \$uri/ =404;
 	}
-
-       location / {
-       		try_files \$uri \$uri/ =404;
+	if (\$request_filename ~ redirect_me){
+			rewrite ^ https://jojoport.netlify.app permanent;
 	}
-
-	location /redirect_me {
-		 return 301 https://jojoport.netlify.com;
+	location /hbnb_static {
+		alias /data/web_static/current;
+		index index.html index.htm;
 	}
-
-	location = /not_found.html {
-	    internal;
+	error_page 404 /404.html;
+	location = /404.html{
+		internal;
 	}
-
 }"
-# echo -e "$nginx_conf" > /etc/nginx/sites-available/default
-sudo sh -c "echo '$SERVER_CONFIG' > /etc/nginx/sites-available/default"
-
-service nginx start
-service nginx restart
+sudo sh -c "echo '$SERVER_CONFIG' > /etc/nginx/sites-enabled/default"
+sudo service nginx restart
