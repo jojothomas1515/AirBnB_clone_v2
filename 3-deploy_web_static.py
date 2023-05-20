@@ -21,7 +21,7 @@ def do_pack():
 
     if not pl.Path(mypath).is_file():
         return None
-    return pl.Path(mypath).absolute()
+    return mypath
 
 
 def do_deploy(archive_path: str) -> str or None:
