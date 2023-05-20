@@ -25,14 +25,14 @@ def do_deploy(archive_path: str) -> str or None:
         run ("mkdir -p /data/web_static/releases/{}".format(filenamew))
         run ("tar -xf {} -C /data/web_static/releases/{}".format(ans[0],
                                                                  filenamew))
-        run ("mv -r /data/web_static/releases/{name}/web_static/*" \
-             "/data/web_static/releases/{name}/"
+        run ("mv /data/web_static/releases/{name}/web_static/*" \
+             " /data/web_static/releases/{name}/"
              .format(name=filenamew))
         run("rm {}".format(ans[0]))
-        run("rm /data/web_static/releases/{}/web_static".format(filenamew))
+        run("rm -rf /data/web_static/releases/{}/web_static".format(filenamew))
         run("rm -rf /data/web_static/current")
         run("ln -s /data/web_static/releases/{} /data/web_static/current"
-            .format(filenamew)
+            .format(filenamew))
         return True
     except Exception:
         return False
