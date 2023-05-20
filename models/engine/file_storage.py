@@ -83,3 +83,7 @@ class FileStorage:
     def new_object(cls):
         """Object storage."""
         cls.__objects = {}
+
+    def close(self):
+        """Deserialize json file file to objects."""
+        self.reload()
