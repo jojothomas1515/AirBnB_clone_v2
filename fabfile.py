@@ -18,8 +18,7 @@ def do_setup():
     """Setup the web server with task on requirements."""
     try:
         put("0-setup_web_static.sh", "~/", mode="777")
-        sudo("./0-setup_web_static.sh")
+        run("sudo ./0-setup_web_static.sh")
         return True
     except Exception:
         return False
-    

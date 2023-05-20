@@ -13,25 +13,18 @@ echo "Hello World!" > /var/www/html/index.html
 echo "Ceci n'est pas une page" > /var/www/html/not_found.html
 
 # creates data directory and all of it sub directories
+mkdir -p /data/web_static/releases/test/ 
+mkdir -p /data/web_static/shared/
+
 mkdir -p /data/web_static/releases/test/
 mkdir -p /data/web_static/shared/
 
-fakeData="<html>
-  <head>
-  </head>
-  <body>
-    Holberton School
-  </body>
-</html>"
-
-
-echo -e "$fakeData" > /data/web_static/releases/test/index.html
+echo -e "Hello Holberton" > /data/web_static/releases/test/index.html
 
 # symbolic link to the test directory
 ln -sf /data/web_static/releases/test/ /data/web_static/current
 
-chown -R ubuntu /data/
-chgrp -R ubuntu /data/
+chown -h -R ubuntu:ubuntu /data/
 
 nginx_conf="server {
        listen 80 default_server;
@@ -46,6 +39,10 @@ nginx_conf="server {
 
        error_page 404 /not_found.html;
 
+       location /hbnb_static {
+		 alias /data/web_static/current/;
+	}
+
        location / {
        		try_files \$uri \$uri/ =404;
 	}
@@ -54,17 +51,11 @@ nginx_conf="server {
 		 return 301 https://jojoport.netlify.com;
 	}
 
-	location /hbnb_stat {
-		 alias /data/web_static/current;
-		 index index.html index.htm;
-	}
-
 	location = /not_found.html {
 	    internal;
 	}
 
 }"
-
 echo -e "$nginx_conf" > /etc/nginx/sites-available/default
 
 service nginx start
