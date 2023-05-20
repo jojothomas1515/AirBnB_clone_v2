@@ -5,6 +5,9 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 import models
+from os import environ
+
+DB = environ.get("HBNB_MYSQL_DB")
 
 
 class State(BaseModel, Base):
@@ -25,4 +28,4 @@ class State(BaseModel, Base):
         for city in models.storage.all(City).values():
             if city.state_id == self.id:
                 cities_list.append(city)
-        return cities_list
+                return cities_list
