@@ -20,11 +20,12 @@ def hbnb():
 
 
 @app.route("/c/<text>", strict_slashes=False)
-def c_text(text:str):
+def c_text(text: str):
     """Somewhat like a loopback."""
     return ("C {}".format(text.replace("_", " ")))
 
 
+@app.route("/python", strict_slashes=False)
 @app.route("/python/<text>", strict_slashes=False)
 def python_text(text: str = "is cool"):
     """Somewhat like a loopback."""
