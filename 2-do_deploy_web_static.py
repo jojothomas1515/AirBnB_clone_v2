@@ -22,12 +22,12 @@ def do_deploy(archive_path: str) -> str or None:
     filenamew = archive_path.split(".")[0].split("/")[-1]
     try:
         ans = put(archive_path, "/tmp/")
-        run ("mkdir -p /data/web_static/releases/{}".format(filenamew))
-        run ("tar -xf {} -C /data/web_static/releases/{}".format(ans[0],
-                                                                 filenamew))
-        run ("mv /data/web_static/releases/{name}/web_static/*" \
-             " /data/web_static/releases/{name}/"
-             .format(name=filenamew))
+        run("mkdir -p /data/web_static/releases/{}".format(filenamew))
+        run("tar -xf {} -C /data/web_static/releases/{}".format(ans[0],
+                                                                filenamew))
+        run("mv /data/web_static/releases/{name}/web_static/*"
+            " /data/web_static/releases/{name}/"
+            .format(name=filenamew))
         run("rm {}".format(ans[0]))
         run("rm -rf /data/web_static/releases/{}/web_static".format(filenamew))
         run("rm -rf /data/web_static/current")
