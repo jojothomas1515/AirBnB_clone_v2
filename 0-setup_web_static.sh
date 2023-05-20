@@ -36,8 +36,8 @@ nginx_conf="server {
 	location / {
 		try_files \$uri \$uri/ =404;
 	}
-	if (\$request_filename ~ redirect_me){
-			rewrite ^ https://jojoport.netlify.app permanent;
+	location /redirect_me {
+			return 301 https://jojoport.netlify.app;
 	}
 	location /hbnb_static {
 		alias /data/web_static/current;
