@@ -9,9 +9,12 @@ env.user = 'ubuntu'
 
 def do_clean(number=0):
     """Cleanup."""
-
+    if number == 0:
+        number =  1
     try:
-        data = run("ls -tr /data/web_static/releases| head -n -{}"\
-                   "|xargs rm -rf".format(number))
+        data = run("ls -tr /data/web_static/releases| head -n -{}"
+                   " | awk 'BEGIN {FS = \" \"}; {print $9}'"
+                   " |xargs rm -rf".format(number))
+        print(data)
     except Exception:
         pass
