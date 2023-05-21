@@ -55,7 +55,8 @@ def even_odd(n: int):
 @app.route("/states_list", strict_slashes=False)
 def states_list():
     """Return the list of states in database."""
-    datas = storage.all(State).values()
+    d = storage.all(State)
+    datas = d.values()
     return (render_template("7-states_list.html", datas=datas))
 
 
