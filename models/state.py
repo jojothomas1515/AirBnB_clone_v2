@@ -18,9 +18,11 @@ class State(BaseModel, Base):
     # if DB == 'db':
     cities = relationship("City", backref="state", cascade="all, delete")
     # else:
+
     @property
     def cities(self):
         """All cities associated with city id."""
+
         cities_list = []
         # from models import storage
         # all_object = storage.all()
