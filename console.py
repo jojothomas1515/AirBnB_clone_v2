@@ -29,7 +29,7 @@ def tokenize(args: str) -> list:
     class_validator = re.compile(pattern)
     params_validator = re.compile(param_pattern)
 
-    token: list = list()
+    token = []
 
     obj_class = class_validator.findall(args)
     obj_param = params_validator.findall(args)
