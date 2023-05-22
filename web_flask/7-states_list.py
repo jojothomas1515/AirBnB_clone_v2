@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 """Flask app for airbnb with routes."""
 
 from flask import Flask, render_template
