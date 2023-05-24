@@ -15,7 +15,7 @@ app = Flask(__name__)
 @app.route('/cities_by_states', strict_slashes=False)
 def cities_list_by_states():
     """Send all the cities associated with a state."""
-    data = storage.all(State)
+    data = storage.all(State).values()
     return render_template("8-cities_by_states.html", datas=data)
 
 
