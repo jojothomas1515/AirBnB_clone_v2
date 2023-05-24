@@ -15,15 +15,17 @@
 	      {% endfor %}
 	    {%- endif %}
 	  </UL>
-      {% elif datas|length > 1 %}
+	{% elif datas|length > 1 %}
+
 	<H1>States</H1>
 	<UL>
 	  {% for state in datas|sort(attribute="name") %}
 	    <LI>{{ state.id }}: <B>{{ state.name }}</B></LI>
 	  {% endfor %}
 	</UL>
-      {% else %}
+	{% else %}
+
 	<H1>Not found!</H1>
-      {%- endif %}
+      {% endif %}
   </BODY>
 </HTML>
