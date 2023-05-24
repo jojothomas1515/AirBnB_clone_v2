@@ -16,7 +16,6 @@ app = Flask(__name__)
 def cities_list_by_states():
     """Send all the cities associated with a state."""
     data = storage.all(State)
-    data = ["jojo", "thomas"]
     return render_template("8-cities_by_states.html", datas=data)
 
 
@@ -24,7 +23,6 @@ def cities_list_by_states():
 def teardown_session(exceptions):
     """Close the session after every requests."""
     storage.close()
-    pass
 
 
 if __name__ == '__main__':
