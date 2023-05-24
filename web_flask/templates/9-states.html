@@ -4,21 +4,17 @@
     <TITLE>HBNB</TITLE>
   </HEAD>
   <BODY>
-    <H1>States</H1>
-    <UL>
-
-      {% if datas|length == 1 %}
+      {%- if datas|length == 1 %}
       {% set state = datas[0] %}
 	<H1>State: {{ state.name }}</H1>
 	<H3>Cities:</H3>
 	  <UL>
-	    {% if state.cities %}
+	    {%- if state.cities %}
 	      {% for city in state.cities|sort(attribute='name') %}
 		<li>{{ city.id }}: <B>{{ city.name }}</B></LI>
 	      {% endfor %}
-	    {% endif %}
+	    {%- endif %}
 	  </UL>
-	</LI>
       {% elif datas|length > 1 %}
 	<H1>States</H1>
 	<UL>
@@ -28,7 +24,6 @@
 	</UL>
       {% else %}
 	<H1>Not found!</H1>
-      {% endif %}
-    </UL>
+      {%- endif %}
   </BODY>
 </HTML>
